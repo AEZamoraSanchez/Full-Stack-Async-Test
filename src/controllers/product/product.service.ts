@@ -2,6 +2,7 @@ import { Model, Optional } from "sequelize";
 import { Product } from "../../entities/product.entity"
 import { ProductResponse } from "../../utils/interfaces/product-response.interface";
 import { CreateProductDTO } from "./dto/createProduct.dto";
+import { ResponseController } from "../../utils/interfaces/response.controller";
 
 
 export class ProductService {
@@ -66,7 +67,18 @@ export class ProductService {
           }
      }
 
-     async deleteProduct(id: number) {
-          return `Eliminar producto con id ${id}`
+     async deleteProduct(id: string) : Promise<ResponseController | void> {
+          try {
+               const productFound = await Product.findByPk(id);
+
+               if (!productFound) {
+                    return { message: 'Producto no encontrado para eliminar', status: 404 };
+               }
+
+               const productDeleted = await productFound.destroy();
+          }
+          catch (error) {
+               throw error;
+          }
      }
 }

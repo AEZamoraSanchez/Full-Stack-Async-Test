@@ -66,20 +66,22 @@ router.get('/:id', async (req: Request, res: Response) => {
      }
    });
    
-  //  router.delete('/:id', async (req: Request, res: Response) => {
-  //   try {
+   router.delete('/:id', async (req: Request, res: Response) => {
+    try {
 
-  //     const result = await _productService.deleteProduct( req.params.id)
+      const result = await _productService.deleteProduct( req.params.id)
+      
+      if (result){
+        if('status' in result){
+          return res.status(result.status).json({ error: result.message})
+        }
+      }
 
-  //     if('status' in result){
-  //       return res.status(result.status).json({ error: result.message})
-  //     }
-
-  //      return res.send(result);
-  //   }
-  //    catch (error : any) {
-  //      res.status(500).json({ error: error?.message });
-  //    }
-  //  });
+       return res.status(204).json({ message: 'Product deleted successfully'});
+    }
+     catch (error : any) {
+       res.status(500).json({ error: error?.message });
+     }
+   });
    
    export const productRoutes = router;
