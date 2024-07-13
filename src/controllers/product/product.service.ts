@@ -37,7 +37,7 @@ export class ProductService {
           }
      }
 
-     async createProduct(product: Optional<CreateProductDTO, any> ) : Promise<ProductResponse> {
+     async createProduct(product: Partial<CreateProductDTO> ) : Promise<ProductResponse> {
           try {
 
                const newProduct = await Product.create(product);
@@ -58,7 +58,7 @@ export class ProductService {
            
                if (updatedRowsCount === 0) {
                  return { message: 'Producto no encontrado para actualizar', status: 404 };
-               }
+               } 
            
                return updatedProduct;
              }
