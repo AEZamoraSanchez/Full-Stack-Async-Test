@@ -49,7 +49,7 @@ export class UserService {
           }
      }
 
-     async updateUser(id: number, userData: Partial<typeof User>) {
+     async updateUser(id: string, userData: Partial<typeof User>) {
           
           try {
                const [updatedRowsCount, [updatedUser]] = await User.update(userData, {

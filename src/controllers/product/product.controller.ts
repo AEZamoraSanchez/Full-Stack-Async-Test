@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/", async (req: Request, res: Response) => {
   try {
-      const result = await (_productService.getProducts());
+      const result = await _productService.getProducts();
       
       if('status' in result){
         return res.status(result.status).json({ error: result.message})
