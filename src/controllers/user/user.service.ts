@@ -1,8 +1,9 @@
 import { Optional } from "sequelize";
-import { User } from "../../entities/user.entity"
+import User from "../../entities/user.entity"
 import { ResponseController } from "../../utils/interfaces/response.controller"
-import { UserResponse } from "../../utils/interfaces/user-response.interface";
+import { UserResponse } from "../../utils/interfaces/user/user-response.interface";
 import { createUserDTO } from "./dto/createUser.dto";
+import { UserInput } from "../../utils/interfaces/user/user-input.interface";
 export class UserService {
 
      async getUsers() : Promise<UserResponse>{
@@ -37,7 +38,7 @@ export class UserService {
           }
      }
 
-     async createUser(user: Partial<typeof User>) : Promise<UserResponse> {
+     async createUser(user: UserInput) : Promise<UserResponse> {
 
           try {
                const newUser = await User.create(user)
@@ -49,7 +50,7 @@ export class UserService {
           }
      }
 
-     async updateUser(id: string, userData: Partial<typeof User>) {
+     async updateUser(id: string, userData: Partial<UserInput>) {
           
           try {
                const [updatedRowsCount, [updatedUser]] = await User.update(userData, {

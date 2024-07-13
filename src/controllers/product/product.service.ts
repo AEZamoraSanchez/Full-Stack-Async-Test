@@ -1,8 +1,10 @@
+import Product from './../../entities/product.entity';
 import { Model, Optional } from "sequelize";
-import { Product } from "../../entities/product.entity"
-import { ProductResponse } from "../../utils/interfaces/product-response.interface";
+import { ProductResponse } from '../../utils/interfaces/product/product-response.interface';
 import { CreateProductDTO } from "./dto/createProduct.dto";
 import { ResponseController } from "../../utils/interfaces/response.controller";
+import { ProductInput } from '../../utils/interfaces/product/product-input.interface';
+
 
 
 export class ProductService {
@@ -37,7 +39,7 @@ export class ProductService {
           }
      }
 
-     async createProduct(product: Partial<CreateProductDTO> ) : Promise<ProductResponse> {
+     async createProduct(product: ProductInput ) : Promise<ProductResponse> {
           try {
 
                const newProduct = await Product.create(product);
@@ -49,7 +51,7 @@ export class ProductService {
           }
      }
 
-     async updateProduct(id: string, productData: Partial<typeof Product>) : Promise<ProductResponse> {
+     async updateProduct(id: string, productData: Partial<ProductInput>) : Promise<ProductResponse> {
           try {
                const [updatedRowsCount, [updatedProduct]] = await Product.update(productData, {
                  where: { id },
