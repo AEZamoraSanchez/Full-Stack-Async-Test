@@ -84,5 +84,17 @@ router.get('/:id', authMiddleware, async (req: Request, res: Response) => {
        res.status(500).json({ error: error?.message });
      }
    });
+
+   router.delete('/', authMiddleware, async (req: Request, res: Response) => {
+    try {
+
+      _productService.deleteInBackground()
+
+      res.json({ message: 'Deletion started in the background'});
+    }
+     catch (error : any) {
+       res.status(500).json({ error: error?.message });
+     }
+   });
    
    export const productRoutes = router;

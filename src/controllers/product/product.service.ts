@@ -83,4 +83,24 @@ export class ProductService {
                throw error;
           }
      }
+
+     async deleteAllProducts() : Promise<ResponseController | void> {
+          try {
+               console.log('Iniciando eliminación de productos en segundo plano...');
+
+               const result = await Product.destroy({ 
+                    where: {},
+                    truncate: true
+               });
+
+               console.log(`Se han eliminado ${result} productos.`);
+          }
+          catch (error) {
+               console.error('Error al eliminar productos:', error);
+          }
+     }
+
+     async deleteInBackground () {
+          setImmediate(this.deleteAllProducts)
+     }
 }
