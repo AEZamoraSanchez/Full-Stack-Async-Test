@@ -23,6 +23,27 @@ export class ProductService {
                throw error;
              }
      }
+     async getFiftyProducts(index : number) : Promise<ProductResponse>{
+          try {
+
+               const offset = 50 * index;
+               const products = await Product.findAll(
+                    {
+                         offset: offset,
+                         limit: 50
+                    }
+               );
+               
+               if (!products) {
+                    return { message: 'No hay productos', status: 404 }
+               }
+
+               return products;
+
+             } catch (error) {
+               throw error;
+             }
+     }
 
       async getTrialProducts () {
           try {
