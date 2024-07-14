@@ -1,9 +1,10 @@
 import { Router, Response, Request } from "express";
 import { AuthService } from "./auth.service";
+import { authMiddleware } from "../../utils/middlewares/auth.middleware";
 
 const _authService = new AuthService();
 const router = Router();
-   router.post('/signup', async (req: Request, res: Response) => {
+   router.post('/signup', authMiddleware, async (req: Request, res: Response) => {
     try {
       const result = await _authService.signup(req.body);
       
@@ -19,7 +20,7 @@ const router = Router();
 
   });
 
-   router.post('/login', async (req: Request, res: Response) => {
+   router.post('/login', authMiddleware, async (req: Request, res: Response) => {
     try {
       const result = await _authService.login(req.body);
       
