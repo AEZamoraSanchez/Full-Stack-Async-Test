@@ -24,6 +24,18 @@ export class ProductService {
              }
      }
 
+      async getTrialProducts () {
+          try {
+               const response = await fetch(process.env.URL_FAKE_STORE!);
+               const data = await response.json();
+               return data;
+               
+          }
+          catch (error) {
+               throw error;
+          }
+     }
+
      async getProductById (id: string) : Promise<ProductResponse> {
           try {
                const productFound = await Product.findByPk(id);

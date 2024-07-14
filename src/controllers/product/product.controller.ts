@@ -5,13 +5,24 @@ import { authMiddleware } from "../../utils/middlewares/auth.middleware";
 const _productService = new ProductService();
 const router = Router();
 
-router.get("/", authMiddleware , async (req: Request, res: Response) => {
+router.get("/all", authMiddleware , async (req: Request, res: Response) => {
   try {
       const result = await _productService.getProducts();
       
       if('status' in result){
         return res.status(result.status).json({ error: result.message})
       }
+
+      return res.status(200).json(result);
+  }
+  catch (error : any) {
+    return res.status(500).json({ error: error?.message });
+  }
+});
+
+router.get("/trial", authMiddleware , async (req: Request, res: Response) => {
+  try {
+      const result = await _productService.getTrialProducts();
 
       return res.status(200).json(result);
   }
