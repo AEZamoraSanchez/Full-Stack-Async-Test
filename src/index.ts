@@ -1,7 +1,7 @@
 import express from 'express';
 import { router } from './routes.index';
 import { db } from './db-connection';
-import jwt from 'jsonwebtoken'
+import swaggerUi from 'swagger-ui-express'
 
 const app = express();
 
