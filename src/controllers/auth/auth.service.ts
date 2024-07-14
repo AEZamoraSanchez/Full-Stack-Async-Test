@@ -1,14 +1,18 @@
-import { User } from "../../entities/user.entity";
-import { UserResponse } from "../../utils/interfaces/user/user-response.interface";
+import User from '../../entities/user.entity'
+import { ResponseController } from '../../utils/interfaces/response.controller';
+import { UserInput } from '../../utils/interfaces/user/user-input.interface';
+import { UserOutput } from '../../utils/interfaces/user/user-output.interface';
 import { UserLoginDTO } from "./dto/userLogin.dto";
 import bcrypt from "bcrypt";
 
 export class AuthService {
 
-     async signup ( user : any) : Promise<UserResponse> {
+     async signup ( user : UserInput) : Promise<UserOutput | ResponseController> {
           try {
                try {
-                    bcrypt.hash(user?.password, 10 )
+                    const passwordHashed = await bcrypt.hash(user?.password, 10 )
+
+                    user.password = passwordHashed;
                     const newUser = await User.create(user)
      
                     return newUser;
@@ -22,7 +26,7 @@ export class AuthService {
           }
      }
 
-     async login ( user : UserLoginDTO) : Promise<UserResponse> {
+     async login ( user : UserLoginDTO) : Promise<UserOutput | ResponseController> {
           try {
                const userFound = await User.findOne({
                     where: {email : user.email}
@@ -32,7 +36,13 @@ export class AuthService {
                     return { message: 'Usuario no encontrado', status: 404 };
                }
                
+              const isMatch = await bcrypt.compare(user.password, userFound.password)
 
+               if (!isMatch) {
+                    return { message: 'Contraseña incorrecta', status: 401 };
+               }
+
+               return userFound;
 
 
           }

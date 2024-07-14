@@ -1,10 +1,11 @@
 import { Router, Response, Request } from "express";
 import { ProductService } from "./product.service";
+import { authMiddleware } from "../../utils/middlewares/auth.middleware";
 
 const _productService = new ProductService();
 const router = Router();
 
-router.get("/", async (req: Request, res: Response) => {
+router.get("/", authMiddleware , async (req: Request, res: Response) => {
   try {
       const result = await _productService.getProducts();
       
@@ -19,7 +20,7 @@ router.get("/", async (req: Request, res: Response) => {
   }
 });
 
-router.get('/:id', async (req: Request, res: Response) => {
+router.get('/:id', authMiddleware, async (req: Request, res: Response) => {
   try {
       const result = await (_productService.getProductById(req.params.id));
 
@@ -35,7 +36,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 
    });
    
-   router.post('/', async (req: Request, res: Response) => {
+   router.post('/', authMiddleware, async (req: Request, res: Response) => {
     try {
       const result = await _productService.createProduct(req.body);
       
@@ -51,7 +52,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 
    });
    
-   router.patch('/:id', async (req: Request, res: Response) => {
+   router.patch('/:id', authMiddleware, async (req: Request, res: Response) => {
     try {
       const result = await _productService.updateProduct(req.params.id, req.body);
 
@@ -66,7 +67,7 @@ router.get('/:id', async (req: Request, res: Response) => {
      }
    });
    
-   router.delete('/:id', async (req: Request, res: Response) => {
+   router.delete('/:id', authMiddleware, async (req: Request, res: Response) => {
     try {
 
       const result = await _productService.deleteProduct( req.params.id)

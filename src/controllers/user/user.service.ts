@@ -38,17 +38,17 @@ export class UserService {
           }
      }
 
-     async createUser(user: UserInput) : Promise<UserResponse> {
+     // async createUser(user: UserInput) : Promise<UserResponse> {
 
-          try {
-               const newUser = await User.create(user)
+     //      try {
+     //           const newUser = await User.create(user)
 
-               return newUser;
-          }
-          catch (error) {
-               throw error;
-          }
-     }
+     //           return newUser;
+     //      }
+     //      catch (error) {
+     //           throw error;
+     //      }
+     // }
 
      async updateUser(id: string, userData: Partial<UserInput>) {
           
