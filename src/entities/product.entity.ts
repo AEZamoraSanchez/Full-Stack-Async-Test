@@ -4,7 +4,7 @@ import { ProductAttributes } from "../utils/interfaces/product/product.attribute
 import { ProductInput } from "../utils/interfaces/product/product-input.interface";
 import { defaultValueSchemable } from "sequelize/types/utils";
 
-class Product extends Model<ProductAttributes, ProductInput> implements ProductAttributes {
+export class Product extends Model<ProductAttributes, ProductInput> implements ProductAttributes {
      public id!: string
      public name!: string
      public description!: string
