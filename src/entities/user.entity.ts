@@ -3,7 +3,7 @@ import { DataTypes, Model } from "sequelize";
 import { UserAttributes } from "../utils/interfaces/user/user.attributes";
 import { UserInput } from "../utils/interfaces/user/user-input.interface";
 
-class User extends Model<UserAttributes, UserInput> implements UserAttributes {
+export class User extends Model<UserAttributes, UserInput> implements UserAttributes {
      public id! : string
      public name!: string;
      public email!: string;
