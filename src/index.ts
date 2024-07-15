@@ -8,6 +8,7 @@ const app = express();
 
 const initApp = async () => {
 
+  const port = process.env.PORT || 3200
   try {
     
     await db.authenticate()
@@ -23,13 +24,13 @@ const initApp = async () => {
     }))
     
     app.get('/', function(req, res) {
-      res.send(' Hello World');
+      res.send(' Hello there');
     })
     
     app.use('/', router)
     
-    app.listen(process.env.PORT, function () {
-      console.log('App listening on port 3000!');
+    app.listen(port, function () {
+      console.log(`App listening on port ${port}`);
     });
 
   }
