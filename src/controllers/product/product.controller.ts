@@ -20,9 +20,9 @@ router.get("/all", authMiddleware , async (req: Request, res: Response) => {
   }
 });
 
-router.get("/fifty/:index", authMiddleware , async (req: Request, res: Response) => {
+router.get("/:size/:index", authMiddleware , async (req: Request, res: Response) => {
   try {
-      const result = await _productService.getFiftyProducts(+req.params.index);
+      const result = await _productService.getFiftyProducts(+req.params.size, +req.params.index);
       
       if('status' in result){
         return res.status(result.status).json({ error: result.message})

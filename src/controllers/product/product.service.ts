@@ -23,14 +23,14 @@ export class ProductService {
                throw error;
              }
      }
-     async getFiftyProducts(index : number) : Promise<ProductResponse>{
+     async getFiftyProducts(size : number, index : number) : Promise<ProductResponse>{
           try {
 
-               const offset = 50 * index;
+               const offset = size * index;
                const products = await Product.findAll(
                     {
                          offset: offset,
-                         limit: 50
+                         limit: size
                     }
                );
                
