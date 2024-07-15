@@ -1,7 +1,8 @@
 import express from 'express';
 import { router } from './routes.index';
 import { db } from './db-connection';
-import jwt from 'jsonwebtoken'
+import swaggerUi from 'swagger-ui-express'
+import cors from 'cors'
 
 const app = express();
 
@@ -16,6 +17,10 @@ const initApp = async () => {
     console.log('All models were synchronized successfully.');
 
     app.use(express.json());
+
+    app.use(cors({
+      origin: process.env.URL_FRONT
+    }))
     
     app.get('/', function(req, res) {
       res.send(' Hello World');
@@ -23,7 +28,7 @@ const initApp = async () => {
     
     app.use('/', router)
     
-    app.listen(3000, function () {
+    app.listen(process.env.PORT, function () {
       console.log('App listening on port 3000!');
     });
 

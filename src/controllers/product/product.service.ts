@@ -23,6 +23,39 @@ export class ProductService {
                throw error;
              }
      }
+     async getFiftyProducts(size : number, index : number) : Promise<ProductResponse>{
+          try {
+
+               const offset = size * index;
+               const products = await Product.findAll(
+                    {
+                         offset: offset,
+                         limit: size
+                    }
+               );
+               
+               if (!products) {
+                    return { message: 'No hay productos', status: 404 }
+               }
+
+               return products;
+
+             } catch (error) {
+               throw error;
+             }
+     }
+
+      async getTrialProducts () {
+          try {
+               const response = await fetch(process.env.URL_FAKE_STORE!);
+               const data = await response.json();
+               return data;
+               
+          }
+          catch (error) {
+               throw error;
+          }
+     }
 
      async getProductById (id: string) : Promise<ProductResponse> {
           try {
