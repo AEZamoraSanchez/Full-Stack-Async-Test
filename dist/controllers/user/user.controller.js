@@ -78,3 +78,4 @@ router.delete('/:id', auth_middleware_1.authMiddleware, (req, res) => __awaiter(
     }
 }));
 exports.userRoutes = router;
+//# sourceMappingURL=user.controller.js.map

@@ -40,3 +40,4 @@ router.post('/login', auth_middleware_1.authMiddleware, (req, res) => __awaiter(
     }
 }));
 exports.authRoutes = router;
+//# sourceMappingURL=auth.controller.js.map

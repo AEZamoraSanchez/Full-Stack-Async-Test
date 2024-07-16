@@ -14,3 +14,4 @@ exports.db = new sequelize_1.Sequelize(process.env.DATABASE_URL, {
         }
     }
 });
+//# sourceMappingURL=db-connection.js.map

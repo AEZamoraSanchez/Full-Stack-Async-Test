@@ -26,3 +26,4 @@ Product.init({
     deletedAt: true
 });
 exports.default = Product;
+//# sourceMappingURL=product.entity.js.map

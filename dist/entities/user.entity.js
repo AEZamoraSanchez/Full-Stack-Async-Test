@@ -22,3 +22,4 @@ User.init({
     deletedAt: true
 });
 exports.default = User;
+//# sourceMappingURL=user.entity.js.map
