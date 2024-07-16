@@ -10,3 +10,4 @@ exports.router = router;
 router.use('/product', product_controller_1.productRoutes);
 router.use('/user', user_controller_1.userRoutes);
 router.use('/auth', auth_controller_1.authRoutes);
+//# sourceMappingURL=routes.index.js.map

@@ -108,3 +108,4 @@ router.delete('/', auth_middleware_1.authMiddleware, (req, res) => __awaiter(voi
     }
 }));
 exports.productRoutes = router;
+//# sourceMappingURL=product.controller.js.map

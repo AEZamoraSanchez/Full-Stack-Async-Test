@@ -13,13 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+require("dotenv/config");
 const routes_index_1 = require("./routes.index");
 const db_connection_1 = require("./db-connection");
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 const initApp = () => __awaiter(void 0, void 0, void 0, function* () {
     const port = process.env.PORT || 3200;
-    console.log('DATABASE_NAME:', process.env.DATABASE_NAME, 'DATABASE_USER:', process.env.DATABASE_USER, 'DATABASE_PASSWORD:', process.env.DATABASE_PASSWORD, 'DATABASE_HOST:', process.env.DATABASE_HOST, 'DATABASE_PORT:', process.env.DATABASE_PORT);
     try {
         yield db_connection_1.db.authenticate();
         console.log('Connection to the database has been established successfully.');
@@ -43,3 +43,4 @@ const initApp = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 initApp();
 exports.default = app;
+//# sourceMappingURL=index.js.map
