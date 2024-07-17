@@ -10,7 +10,6 @@ const app = express();
 const initApp = async () => {
 
   const port = process.env.PORT || 3200
-
   try {
     
     await db.authenticate()

@@ -7,14 +7,15 @@ exports.db = void 0;
 const sequelize_1 = require("sequelize");
 require("dotenv/config");
 const pg_1 = __importDefault(require("pg"));
-exports.db = new sequelize_1.Sequelize({
-    username: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME,
-    host: process.env.DATABASE_HOST,
-    port: +process.env.DATABASE_PORT,
+exports.db = new sequelize_1.Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
     dialectModule: pg_1.default,
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false
+        }
+    },
     define: {
         charset: 'utf8mb4',
         collate: 'utf8mb4_general_ci',
